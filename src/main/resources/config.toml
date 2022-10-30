@@ -1,0 +1,7 @@
+[[bots]]
+account = 123
+password = "123"
+
+[[bots]]
+account = 456
+password = "456"

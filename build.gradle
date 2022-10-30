@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.30'
+}
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+group 'fun.lykorisr.fiammetta'
+version '1.0.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+
+    implementation 'net.mamoe:mirai-core:2.9.1'
+    // https://mvnrepository.com/artifact/org.tomlj/tomlj
+    implementation group: 'org.tomlj', name: 'tomlj', version: '1.1.0'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+shadowJar {
+    manifest {
+        attributes(
+                'Main-Class': 'fun.lykorisr.fiammetta.FiammettaMain',
+                "Multi-Release": true
+        )
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
